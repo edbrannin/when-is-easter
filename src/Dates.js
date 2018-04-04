@@ -1,5 +1,3 @@
-//import React, { Component } from 'react';
-
 import moment from 'moment-easter';
 
 const datesInYear = (year) => {
@@ -22,6 +20,9 @@ const datesInYear = (year) => {
     }
 }
 
+const transposeDates = () => [];
+
 export {
     datesInYear,
+    transposeDates,
 };
