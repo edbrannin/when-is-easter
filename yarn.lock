@@ -4156,9 +4156,9 @@ mkdirp@0.5.1, mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.1, mkdirp@~0.5.0, mkdi
   dependencies:
     minimist "0.0.8"
 
-moment-easter@^0.1.0:
+"moment-easter@https://github.com/nzdenek/moment-easter.git#module-checks":
   version "0.1.0"
-  resolved "https://registry.yarnpkg.com/moment-easter/-/moment-easter-0.1.0.tgz#e5d3d7936ddef1ade2e56522ccb9dc85736aabcc"
+  resolved "https://github.com/nzdenek/moment-easter.git#e02404ccb85f0e535a6635bb9d796b09084b51b7"
   dependencies:
     moment ">=1.4.0"
 
