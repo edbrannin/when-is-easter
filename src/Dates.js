@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+//import React, { Component } from 'react';
 
 import moment from 'moment-easter';
 
-export const datesInYear = (year) => {
+const datesInYear = (year) => {
     const easter = moment().easter(year);
     const ashWednesday = easter.clone().subtract(46, 'days');
     const palmSunday = easter.clone().subtract(7, 'days');
@@ -21,3 +21,7 @@ export const datesInYear = (year) => {
         holySaturday,
     }
 }
+
+export {
+    datesInYear,
+};
