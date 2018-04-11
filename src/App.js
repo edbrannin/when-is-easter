@@ -14,6 +14,31 @@ const Dates = dates => <ul>{dates.map(date => <li>{date}</li>)}</ul>;
 
 const Debug = data => <pre>{JSON.stringify(data, null, 2)}</pre>
 
+const YearDates = ({ dates, highlightYear }) => (
+  <div
+    key={dates.year}
+    style={{
+      float: 'left',
+      margin: '1em',
+      backgroundColor: (highlightYear === dates.year) && 'wheat',
+      borderRadius: '1em',
+  }}
+    id={dates.year}
+  >
+    <h2>{dates.year}</h2>
+    <table>
+  <tbody>
+      {Object.entries(dates).map(([k, v]) => (k !== 'year' &&
+        <tr key={k}>
+          <td>{_.startCase(k)}</td>
+          <td>{v.format ? v.format("MM-DD") : v}</td>
+        </tr>
+      ))}
+  </tbody>
+    </table>
+  </div>
+);
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -91,32 +116,8 @@ class App extends Component {
       }
         </header>{" "}
         <div>
-          {" "}
-          {this.state.datesByYear &&
-            this.state.datesByYear.map(dates => (
-              <div
-                key={dates.year}
-                style={{
-                  float: 'left',
-                  margin: '1em',
-                  backgroundColor: (thisYear === dates.year) && 'wheat',
-                  borderRadius: '1em',
-              }}
-                id={dates.year}
-              >
-                <h2>{dates.year}</h2>
-                <table>
-              <tbody>
-                  {Object.entries(dates).map(([k, v]) => (k !== 'year' &&
-                    <tr key={k}>
-                      <td>{_.startCase(k)}</td>
-                      <td>{v.format ? v.format("MM-DD") : v}</td>
-                    </tr>
-                  ))}
-              </tbody>
-                </table>
-              </div>
-            ))}
+          {this.state.datesByYear 
+            && this.state.datesByYear.map(dates => <YearDates dates={dates} highlightYear={thisYear} />) }
         </div>
       </div>
     );
