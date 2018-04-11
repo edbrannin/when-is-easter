@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import moment from "moment";
+import _ from 'lodash';
 
 import {
   yearSpan,
@@ -35,6 +36,10 @@ class App extends Component {
       console.log("compute!");
       const startDate = Number(this.startInput.value);
       const endDate = Number(this.endInput.value);
+      if (this.state.startDate === startDate && this.state.endDate === endDate) {
+        console.log("Don't compute, actually -- dates are unchanged.");
+        return;
+      }
       console.log(`Computing ${startDate} to ${endDate}`);
       const years = yearSpan(startDate, endDate);
       console.log(`Year count expected: ${endDate - startDate + 1}, actual: ${years.length}`);
@@ -67,6 +72,7 @@ class App extends Component {
               defaultValue={moment()
                 .subtract(100, "years")
                 .year()}
+              onBlur={this.compute}
             />
           </label>
           <label>
@@ -76,6 +82,7 @@ class App extends Component {
               defaultValue={moment()
                 .add(100, "years")
                 .year()}
+              onBlur={this.compute}
             />{" "}
           </label>{" "}
           <button onClick={this.compute}>Compute!</button>{" "}
@@ -83,7 +90,6 @@ class App extends Component {
         // TODO: Add UI to set span length around this year
       }
         </header>{" "}
-        { true &&
         <div>
           {" "}
           {this.state.datesByYear &&
@@ -103,7 +109,7 @@ class App extends Component {
               <tbody>
                   {Object.entries(dates).map(([k, v]) => (k !== 'year' &&
                     <tr key={k}>
-                      <td>{k}</td>
+                      <td>{_.startCase(k)}</td>
                       <td>{v.format ? v.format("MM-DD") : v}</td>
                     </tr>
                   ))}
@@ -112,7 +118,6 @@ class App extends Component {
               </div>
             ))}
         </div>
-        }
       </div>
     );
   }

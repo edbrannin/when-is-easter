@@ -5,9 +5,6 @@ const yearSpan = (start, end) => _.range(start, end + 1)
 
 const datesInYear = (year) => {
   // console.log(`Copmuting for year: ${year})`);
-    if (year > 2500) {
-        throw new Error('FAR FUTURE');
-    }
     const easter = moment({y: year}).easter();
     const ashWednesday = easter.clone().subtract(46, 'days');
     const palmSunday = easter.clone().subtract(7, 'days');
