@@ -1,5 +1,5 @@
 import moment from 'moment-easter'
-import { datesInYear } from './Dates';
+import { datesInYear, yearSpan } from './Dates';
 
 expect.extend({
     toBeDate: (received, year, month, day) => {
@@ -8,17 +8,33 @@ expect.extend({
         if (rxDate === expectedDate) {
             return {
                 message: () =>
-                `expected ${received} not to be on ${year}-${month}-${day}`,
+                `expected ${rxDate} not to be on ${expectedDate}`,
                 pass: true,
             };
         } else {
             return {
                 message: () =>
-                `expected ${received} to be on ${year}-${month}-${day}`,
+                `expected ${rxDate} to be on ${expectedDate}`,
                 pass: false,
             };
         }
     }
+})
+
+it('should compute year span', () => {
+    const answer = yearSpan(2000, 2020);
+    expect(answer.length).toBe(21);
+});
+
+it('should handle 2017', () => {
+    const answer = datesInYear(2017);
+    expect(answer.easter).toBeDate(2017, 4, 16);
+    expect(answer.ashWednesday).toBeDate(2017, 3, 1);
+    expect(answer.palmSunday).toBeDate(2017, 4, 9);
+    expect(answer.spyWednesday).toBeDate(2017, 4, 12);
+    expect(answer.holyThursday).toBeDate(2017, 4, 13);
+    expect(answer.goodFriday).toBeDate(2017, 4, 14);
+    expect(answer.holySaturday).toBeDate(2017, 4, 15);
 })
 
 it('should handle 2018', () => {
@@ -30,4 +46,15 @@ it('should handle 2018', () => {
     expect(answer.holyThursday).toBeDate(2018, 3, 29);
     expect(answer.goodFriday).toBeDate(2018, 3, 30);
     expect(answer.holySaturday).toBeDate(2018, 3, 31);
+})
+
+it('should handle 2019', () => {
+    const answer = datesInYear(2019);
+    expect(answer.easter).toBeDate(2019, 4, 21);
+    expect(answer.ashWednesday).toBeDate(2019, 3, 6);
+    expect(answer.palmSunday).toBeDate(2019, 4, 14);
+    expect(answer.spyWednesday).toBeDate(2019, 4, 17);
+    expect(answer.holyThursday).toBeDate(2019, 4, 18);
+    expect(answer.goodFriday).toBeDate(2019, 4, 19);
+    expect(answer.holySaturday).toBeDate(2019, 4, 20);
 })

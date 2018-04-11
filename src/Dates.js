@@ -1,7 +1,14 @@
 import moment from 'moment-easter';
+import _ from 'lodash';
+
+const yearSpan = (start, end) => _.range(start, end + 1)
 
 const datesInYear = (year) => {
-    const easter = moment().easter(year);
+  // console.log(`Copmuting for year: ${year})`);
+    if (year > 2500) {
+        throw new Error('FAR FUTURE');
+    }
+    const easter = moment({y: year}).easter();
     const ashWednesday = easter.clone().subtract(46, 'days');
     const palmSunday = easter.clone().subtract(7, 'days');
     const spyWednesday = easter.clone().subtract(4, 'days');
@@ -17,12 +24,22 @@ const datesInYear = (year) => {
         holyThursday,
         goodFriday,
         holySaturday,
+        year,
     }
 }
 
-const transposeDates = () => [];
+const datesInYears = (years) => (console.log(`Years: ${years}`) || years || []).map(year => datesInYear(year));
+
+const datesInYearsToDatesByDay = (dates) => {
+    return Object.keys(dates[0]).map(day => ({
+        day,
+        dates: dates.map(d => d[day])
+    }))
+};
 
 export {
+    yearSpan,
     datesInYear,
-    transposeDates,
+    datesInYears,
+    datesInYearsToDatesByDay,
 };

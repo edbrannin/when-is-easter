@@ -1,62 +1,118 @@
-import React, { Component } from 'react';
-import moment from 'moment';
+import React, { Component } from "react";
+import moment from "moment";
 
-import { datesInYear, transposeDates } from './Dates'
-import './App.css';
+import {
+  yearSpan,
+  datesInYear,
+  datesInYears,
+  datesInYearsToDatesByDay
+} from "./Dates";
+import "./App.css";
 
-const Dates = (dates) => (
-  <ul>
-    {dates.map(date => <li>{date}</li>)}
-  </ul>
-);
+const Dates = dates => <ul>{dates.map(date => <li>{date}</li>)}</ul>;
+
+const Debug = data => <pre>{JSON.stringify(data, null, 2)}</pre>
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.refStart = elem => { this.startInput = elem; this.compute(); };
-    this.refEnd = elem => { this.endInput = elem; this.compute(); };
+    this.state = {};
+    this.refStart = elem => {
+      this.startInput = elem;
+    };
+    this.refEnd = elem => {
+      this.endInput = elem;
+    };
     this.compute = () => {
-      if (this.startInput === undefined || this.endInput === undefined) {
+      if (typeof(this.startInput) === 'undefined' || typeof(this.endInput) === 'undefined') {
+        console.log('undefined');
         return;
       }
-      console.log('compute!');
-      const startDate = this.startInput.value;
-      const endDate = this.endInput.value
-      const years = [];
-      const datesByYear = years.map(year => datesInYear(year));
-      const daysByDate = transposeDates(datesByYear);
+      if (this.startInput === null || this.endInput === null) {
+        console.log('Null inputs.');
+        return;
+      }
+      console.log("compute!");
+      const startDate = Number(this.startInput.value);
+      const endDate = Number(this.endInput.value);
+      console.log(`Computing ${startDate} to ${endDate}`);
+      const years = yearSpan(startDate, endDate);
+      console.log(`Year count expected: ${endDate - startDate + 1}, actual: ${years.length}`);
+      const datesByYear = years.map(datesInYear);
+      const daysByDate = datesInYearsToDatesByDay(datesByYear);
       this.setState({
         startDate,
         endDate,
+        years,
         datesByYear,
-      })
+        daysByDate
+      });
     };
   }
 
+  componentDidMount() {
+    this.compute();
+  }
+
   render() {
+    const thisYear = moment().year()
     return (
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">When is Easter?</h1>
           <label>
-            Starting year:
-            &nbsp;
-            <input ref={this.refStart} defaultValue={moment().subtract(100, 'years').year()} />
+            Starting year: &nbsp;
+            <input
+              ref={this.refStart}
+              defaultValue={moment()
+                .subtract(100, "years")
+                .year()}
+            />
           </label>
           <label>
-            Ending year:
-            &nbsp;
-            <input ref={this.refEnd} defaultValue={moment().add(100, 'years').year()} />
-          </label>
-          <label>
-            Compute:
-            &nbsp;
-            <button onClick={this.compute}/>
-          </label>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+            Ending year: &nbsp;
+            <input
+              ref={this.refEnd}
+              defaultValue={moment()
+                .add(100, "years")
+                .year()}
+            />{" "}
+          </label>{" "}
+          <button onClick={this.compute}>Compute!</button>{" "}
+      {
+        // TODO: Add UI to set span length around this year
+      }
+        </header>{" "}
+        { true &&
+        <div>
+          {" "}
+          {this.state.datesByYear &&
+            this.state.datesByYear.map(dates => (
+              <div
+                key={dates.year}
+                style={{
+                  float: 'left',
+                  margin: '1em',
+                  backgroundColor: (thisYear === dates.year) && 'wheat',
+                  borderRadius: '1em',
+              }}
+                id={dates.year}
+              >
+                <h2>{dates.year}</h2>
+                <table>
+              <tbody>
+                  {Object.entries(dates).map(([k, v]) => (k !== 'year' &&
+                    <tr key={k}>
+                      <td>{k}</td>
+                      <td>{v.format ? v.format("MM-DD") : v}</td>
+                    </tr>
+                  ))}
+              </tbody>
+                </table>
+              </div>
+            ))}
+        </div>
+        }
       </div>
     );
   }
