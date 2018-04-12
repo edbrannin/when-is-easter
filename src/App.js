@@ -27,14 +27,14 @@ const YearDates = ({ dates, highlightYear }) => (
   >
     <h2>{dates.year}</h2>
     <table>
-  <tbody>
-      {Object.entries(dates).map(([k, v]) => (k !== 'year' &&
-        <tr key={k}>
-          <td>{_.startCase(k)}</td>
-          <td>{v.format ? v.format("MM-DD") : v}</td>
-        </tr>
-      ))}
-  </tbody>
+      <tbody>
+        {Object.entries(dates).map(([k, v]) => (k !== 'year' &&
+          <tr key={k}>
+            <td>{_.startCase(k)}</td>
+            <td>{v.format ? v.format("MM-DD") : v}</td>
+          </tr>
+        ))}
+      </tbody>
     </table>
   </div>
 );
@@ -44,14 +44,11 @@ class YearInput extends Component {
     super(props);
     this.state = {};
     this.onBlur = () => {
-      console.log(`onBlur for ${this.props.label}`);
       if (this.input) {
-        console.log(`Invoking callback for ${this.props.label}`);
         this.props.callback(Number(this.input.value));
       }
     }
     this.ref = elem => {
-      console.log(`Setting ref for ${this.props.label}`);
       this.input = elem;
       this.onBlur();
     }
