@@ -46,6 +46,8 @@ it('should handle 2018', () => {
     expect(answer.holyThursday).toBeDate(2018, 3, 29);
     expect(answer.goodFriday).toBeDate(2018, 3, 30);
     expect(answer.holySaturday).toBeDate(2018, 3, 31);
+    expect(answer.ascensionThursday).toBeDate(2018, 5, 10);
+    expect(answer.pentecost).toBeDate(2018, 5, 20);
 })
 
 it('should handle 2019', () => {

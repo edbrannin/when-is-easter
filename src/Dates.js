@@ -12,15 +12,20 @@ const datesInYear = (year) => {
     const holyThursday = easter.clone().subtract(3, 'days');
     const goodFriday = easter.clone().subtract(2, 'days');
     const holySaturday = easter.clone().subtract(1, 'day');
+    const mercySunday = easter.clone().add(7, 'days');
+    const ascensionThursday = easter.clone().add(39, 'days');
+    const pentecost = easter.clone().add(49, 'days');
 
     return {
-        easter,
         ashWednesday,
         palmSunday,
         spyWednesday,
         holyThursday,
         goodFriday,
         holySaturday,
+        easter,
+        ascensionThursday,
+        pentecost,
         year,
     }
 }
