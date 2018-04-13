@@ -7,7 +7,7 @@ import {
   feastsInYear,
   feastsInYears,
   feastsInYearsToFeastsByDay
-} from "./Dates";
+} from "./Feasts";
 import "./App.css";
 
 const Feasts = feasts => <ul>{feasts.map(date => <li>{date}</li>)}</ul>;

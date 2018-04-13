@@ -1,5 +1,5 @@
 import moment from 'moment-easter'
-import { feastsInYear, yearSpan } from './Dates';
+import { feastsInYear, yearSpan } from './Feasts';
 
 expect.extend({
     toBeDate: (received, year, month, day) => {
