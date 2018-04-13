@@ -22,7 +22,7 @@ expect.extend({
 
 it('should compute year span', () => {
   const answer = yearSpan(2000, 2020);
-  expect(answer.length).toBe(21);
+  expect(answer).toHaveLength(21);
 });
 
 it('should handle 2017', () => {

@@ -1,16 +1,9 @@
 import React, { Component } from 'react';
 
 import YearFeasts from './YearFeasts';
-import {
-  yearSpan,
-  feastsInYear,
-  feastsInYearsToFeastsByDay,
-} from './Feasts';
+import { yearSpan, feastsInYear, feastsInYearsToFeastsByDay } from './Feasts';
 
-const computeEasterForYears = ({
-  startYear,
-  endYear,
-}) => {
+const computeEasterForYears = ({ startYear, endYear }) => {
   const years = yearSpan(startYear, endYear);
   const feastsByYear = years.map(feastsInYear);
   const daysByDate = feastsInYearsToFeastsByDay(feastsByYear);
@@ -25,20 +18,22 @@ const computeEasterForYears = ({
 };
 
 class FeastApp extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.startYear === undefined || nextProps.endYear === undefined) {
       return {};
     }
-    if (prevState.startYear === nextProps.startYear
-        && prevState.endYear === nextProps.endYear) {
+    if (
+      prevState.startYear === nextProps.startYear &&
+      prevState.endYear === nextProps.endYear
+    ) {
       return {};
     }
     return computeEasterForYears(nextProps);
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {};
   }
 
   render() {
@@ -46,8 +41,14 @@ class FeastApp extends Component {
     const { feastsByYear } = this.state;
     return (
       <div>
-        {feastsByYear
-          && feastsByYear.map(feasts => <YearFeasts key={feasts.year} feasts={feasts} highlightYear={highlightYear} />) }
+        {feastsByYear &&
+          feastsByYear.map(feasts => (
+            <YearFeasts
+              key={feasts.year}
+              feasts={feasts}
+              highlightYear={highlightYear}
+            />
+          ))}
       </div>
     );
   }

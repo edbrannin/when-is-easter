@@ -4,7 +4,6 @@ import _ from 'lodash';
 const yearSpan = (start, end) => _.range(start, end + 1);
 
 const feastsInYear = (year) => {
-  // console.log(`Copmuting for year: ${year})`);
   const easter = moment({ y: year }).easter();
   const ashWednesday = easter.clone().subtract(46, 'days');
   const palmSunday = easter.clone().subtract(7, 'days');
@@ -40,8 +39,6 @@ const feastsInYear = (year) => {
   };
 };
 
-const feastsInYears = years => (console.log(`Years: ${years}`) || years || []).map(year => feastsInYear(year));
-
 const feastsInYearsToFeastsByDay = feasts => Object.keys(feasts[0]).map(day => ({
   day,
   feasts: feasts.map(d => d[day]),
@@ -50,6 +47,5 @@ const feastsInYearsToFeastsByDay = feasts => Object.keys(feasts[0]).map(day => (
 export {
   yearSpan,
   feastsInYear,
-  feastsInYears,
   feastsInYearsToFeastsByDay,
 };
