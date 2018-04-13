@@ -24,6 +24,7 @@ const datesInYear = (year) => {
         goodFriday,
         holySaturday,
         easter,
+        mercySunday,
         ascensionThursday,
         pentecost,
         year,
