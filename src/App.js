@@ -4,31 +4,31 @@ import _ from 'lodash';
 
 import {
   yearSpan,
-  datesInYear,
-  datesInYears,
-  datesInYearsToDatesByDay
+  feastsInYear,
+  feastsInYears,
+  feastsInYearsToFeastsByDay
 } from "./Dates";
 import "./App.css";
 
-const Dates = dates => <ul>{dates.map(date => <li>{date}</li>)}</ul>;
+const Feasts = feasts => <ul>{feasts.map(date => <li>{date}</li>)}</ul>;
 
 const Debug = props => <pre>{JSON.stringify(props, null, 2)}</pre>
 
-const YearDates = ({ dates, highlightYear }) => (
+const YearFeasts = ({ feasts, highlightYear }) => (
   <div
-    key={dates.year}
+    key={feasts.year}
     style={{
       float: 'left',
       margin: '1em',
-      backgroundColor: (highlightYear === dates.year) && 'wheat',
+      backgroundColor: (highlightYear === feasts.year) && 'wheat',
       borderRadius: '1em',
   }}
-    id={dates.year}
+    id={feasts.year}
   >
-    <h2>{dates.year}</h2>
+    <h2>{feasts.year}</h2>
     <table>
       <tbody>
-        {Object.entries(dates).map(([k, v]) => (k !== 'year' &&
+        {Object.entries(feasts).map(([k, v]) => (k !== 'year' &&
           <tr key={k}>
             <td>{_.startCase(k)}</td>
             <td>{v.format ? v.format("MM-DD") : v}</td>
@@ -74,19 +74,19 @@ const computeEasterForYears = ({
   endYear,
 }) => {
   const years = yearSpan(startYear, endYear);
-  const datesByYear = years.map(datesInYear);
-  const daysByDate = datesInYearsToDatesByDay(datesByYear);
+  const feastsByYear = years.map(feastsInYear);
+  const daysByDate = feastsInYearsToFeastsByDay(feastsByYear);
 
   return {
     startYear,
     endYear,
     years,
-    datesByYear,
+    feastsByYear,
     daysByDate
   };
 };
 
-class DatesApp extends Component {
+class FeastApp extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -105,11 +105,11 @@ class DatesApp extends Component {
 
   render() {
     const { highlightYear } = this.props;
-    const { datesByYear } = this.state;
+    const { feastsByYear } = this.state;
     return (
       <div>
-        {datesByYear
-          && datesByYear.map(dates => <YearDates key={dates.year} dates={dates} highlightYear={highlightYear} />) }
+        {feastsByYear
+          && feastsByYear.map(feasts => <YearFeasts key={feasts.year} feasts={feasts} highlightYear={highlightYear} />) }
       </div>
     );
   }
@@ -148,7 +148,7 @@ class App extends Component {
             // TODO: Add UI to set span length around this year
           }
         </header>
-        <DatesApp startYear={startYear} endYear={endYear} highlightYear={thisYear} />
+        <FeastApp startYear={startYear} endYear={endYear} highlightYear={thisYear} />
       </div>
     );
   }

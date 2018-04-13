@@ -1,5 +1,5 @@
 import moment from 'moment-easter'
-import { datesInYear, yearSpan } from './Dates';
+import { feastsInYear, yearSpan } from './Dates';
 
 expect.extend({
     toBeDate: (received, year, month, day) => {
@@ -27,7 +27,7 @@ it('should compute year span', () => {
 });
 
 it('should handle 2017', () => {
-    const answer = datesInYear(2017);
+    const answer = feastsInYear(2017);
     expect(answer.easter).toBeDate(2017, 4, 16);
     expect(answer.ashWednesday).toBeDate(2017, 3, 1);
     expect(answer.palmSunday).toBeDate(2017, 4, 9);
@@ -38,7 +38,7 @@ it('should handle 2017', () => {
 })
 
 it('should handle 2018', () => {
-    const answer = datesInYear(2018);
+    const answer = feastsInYear(2018);
     expect(answer.easter).toBeDate(2018, 4, 1);
     expect(answer.ashWednesday).toBeDate(2018, 2, 14);
     expect(answer.palmSunday).toBeDate(2018, 3, 25);
@@ -51,7 +51,7 @@ it('should handle 2018', () => {
 })
 
 it('should handle 2019', () => {
-    const answer = datesInYear(2019);
+    const answer = feastsInYear(2019);
     expect(answer.easter).toBeDate(2019, 4, 21);
     expect(answer.ashWednesday).toBeDate(2019, 3, 6);
     expect(answer.palmSunday).toBeDate(2019, 4, 14);
