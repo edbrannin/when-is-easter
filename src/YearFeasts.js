@@ -5,8 +5,8 @@ const YearFeasts = ({ feasts, highlightYear }) => (
   <div
     key={feasts.year}
     style={{
-      float: 'left',
-      margin: '1em',
+      display: 'inline-block',
+      padding: '1em',
       backgroundColor: (highlightYear === feasts.year) && 'wheat',
       borderRadius: '1em',
   }}
@@ -18,6 +18,7 @@ const YearFeasts = ({ feasts, highlightYear }) => (
         {Object.entries(feasts).map(([k, v]) => (k !== 'year' &&
           <tr key={k}>
             <td>{_.startCase(k)}</td>
+            { false && <td>{v.format && v.format('ddd')}</td> }
             <td>{v.format ? v.format("MM-DD") : v}</td>
           </tr>
         ))}
