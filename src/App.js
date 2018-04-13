@@ -6,6 +6,8 @@ import FeastApp from './FeastApp';
 // import Debug from './Debug';
 import "./App.css";
 
+const DEFAULT_YEAR_SPREAD = 50;
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -27,12 +29,12 @@ class App extends Component {
           <h1 className="App-title">When is Easter?</h1>
           <YearInput
             label="Starting"
-            defaultValue={moment().subtract(100, 'years').year()}
+            defaultValue={moment().subtract(DEFAULT_YEAR_SPREAD, 'years').year()}
             callback={this.setStart}
           />
           <YearInput
             label="Ending"
-            defaultValue={moment().add(100, 'years').year()}
+            defaultValue={moment().add(DEFAULT_YEAR_SPREAD, 'years').year()}
             callback={this.setEnd}
           />
           {
