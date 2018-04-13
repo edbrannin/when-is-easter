@@ -16,6 +16,11 @@ const feastsInYear = (year) => {
     const ascensionThursday = easter.clone().add(39, 'days');
     const pentecost = easter.clone().add(49, 'days');
 
+    const trinitySunday = pentecost.clone().add(7, 'days');
+    const corpusChristi = pentecost.clone().add(11, 'days');
+    const sanguinemqueSunday = pentecost.clone().add(14, 'days');
+    const sacredHeart = pentecost.clone().add(19, 'days');
+
     return {
         ashWednesday,
         palmSunday,
@@ -27,6 +32,10 @@ const feastsInYear = (year) => {
         mercySunday,
         ascensionThursday,
         pentecost,
+        trinitySunday,
+        corpusChristi,
+        sanguinemqueSunday,
+        sacredHeart,
         year,
     }
 }
