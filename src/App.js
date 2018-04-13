@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import moment from "moment";
+import React, { Component } from 'react';
+import moment from 'moment';
 
 import YearInput from './YearInput';
 import FeastApp from './FeastApp';
 // import Debug from './Debug';
-import "./App.css";
+import './App.css';
 
 const DEFAULT_YEAR_SPREAD = 50;
 
@@ -12,16 +12,16 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.setStart = value => {
-      this.setState({ startYear: value })
+    this.setStart = (value) => {
+      this.setState({ startYear: value });
     };
-    this.setEnd = value => {
-      this.setState({ endYear: value })
+    this.setEnd = (value) => {
+      this.setState({ endYear: value });
     };
   }
 
   render() {
-    const thisYear = moment().year()
+    const thisYear = moment().year();
     const { startYear, endYear } = this.state;
     return (
       <div className="App">

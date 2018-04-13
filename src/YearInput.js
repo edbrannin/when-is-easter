@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 class YearInput extends Component {
   constructor(props) {
@@ -8,11 +8,11 @@ class YearInput extends Component {
       if (this.input) {
         this.props.callback(Number(this.input.value));
       }
-    }
-    this.ref = elem => {
+    };
+    this.ref = (elem) => {
       this.input = elem;
       this.onBlur();
-    }
+    };
   }
 
   render() {
@@ -26,7 +26,7 @@ class YearInput extends Component {
           defaultValue={defaultValue}
         />
       </label>
-    )
+    );
   }
 }
 

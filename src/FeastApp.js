@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 import YearFeasts from './YearFeasts';
 import {
   yearSpan,
   feastsInYear,
-  feastsInYearsToFeastsByDay
-} from "./Feasts";
+  feastsInYearsToFeastsByDay,
+} from './Feasts';
 
 const computeEasterForYears = ({
   startYear,
@@ -20,7 +20,7 @@ const computeEasterForYears = ({
     endYear,
     years,
     feastsByYear,
-    daysByDate
+    daysByDate,
   };
 };
 

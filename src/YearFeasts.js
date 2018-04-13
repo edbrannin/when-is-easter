@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import _ from 'lodash';
 
 const YearFeasts = ({ feasts, highlightYear }) => (
@@ -19,7 +19,7 @@ const YearFeasts = ({ feasts, highlightYear }) => (
           <tr key={k}>
             <td>{_.startCase(k)}</td>
             { false && <td>{v.format && v.format('ddd')}</td> }
-            <td>{v.format ? v.format("MM-DD") : v}</td>
+            <td>{v.format ? v.format('MM-DD') : v}</td>
           </tr>
         ))}
       </tbody>
