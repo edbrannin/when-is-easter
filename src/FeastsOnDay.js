@@ -10,13 +10,13 @@ const FeastsOnDay = ({ date, feastsAndDays }) => (
       }}
     >
       <tbody>
-        {feastsAndDays.map(([feast, date]) => (
-          <tr key={date.toISOString()}>
+        {feastsAndDays.map(([feast, moment]) => (
+          <tr key={moment.toISOString()}>
             <td>
               <FeastName name={feast} />
             </td>
             <td>
-              {date.year()}
+              {moment.year()}
             </td>
           </tr>
         ))}

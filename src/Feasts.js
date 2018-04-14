@@ -39,7 +39,7 @@ const feastsInYear = (year) => {
   };
 };
 
-const feastsOnDay = (feasts, monthAndDay) => Object.entries(feasts).filter(([feast, feastDate]) => feastDate.format && feastDate.format('MM-DD') === monthAndDay);
+const feastsOnDay = (feasts, monthAndDay) => Object.entries(feasts).filter(([, feastDate]) => feastDate.format && feastDate.format('MM-DD') === monthAndDay);
 
 const feastsOnDayFilter = monthAndDay => feasts => feastsOnDay(feasts, monthAndDay);
 
