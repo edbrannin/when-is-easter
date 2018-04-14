@@ -83,11 +83,6 @@ class FeastApp extends Component {
                   date={match.params.monthAndDay}
                   feastsAndDays={feastsByYearToFeastsOnDay(feastsByYear, match.params.monthAndDay)}
                 />
-                <Debug
-                  match={match}
-                  date={match.params.monthAndDay}
-                  feastsAndDays={feastsByYearToFeastsOnDay(feastsByYear, match.params.monthAndDay)}
-                />
               </div>
             )}
           />
