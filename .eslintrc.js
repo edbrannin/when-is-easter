@@ -12,5 +12,6 @@ module.exports = {
   },
   "rules": {
     "react/prop-types": "off", // Temporary
+    "react/jsx-filename-extension": "off",
   }
 };
