@@ -1,5 +1,33 @@
 import React from 'react';
-import _ from 'lodash';
+import { Link } from 'react-router-dom';
+
+import FeastName from './FeastName';
+
+const YearFeastRow = ({ feast, date }) => {
+  if (feast === 'year' || !date.format) {
+    return null;
+  }
+
+  const dateString = date.format('MM-DD');
+
+  return (
+    <tr key={feast}>
+      <td>
+        { false ? <Link to={`/feast/${feast}`}>
+          <FeastName name={feast} />
+        </Link> : 
+          <FeastName name={feast} />
+          }
+      </td>
+      { false && <td>{date.format && date.format('ddd')}</td> }
+      <td>
+        <Link to={`/date/${dateString}`}>
+          {dateString}
+        </Link>
+      </td>
+    </tr>
+  );
+};
 
 const YearFeasts = ({ feasts, highlightYear }) => (
   <div
@@ -15,12 +43,8 @@ const YearFeasts = ({ feasts, highlightYear }) => (
     <h2>{feasts.year}</h2>
     <table>
       <tbody>
-        {Object.entries(feasts).map(([k, v]) => (k !== 'year' &&
-          <tr key={k}>
-            <td>{_.startCase(k)}</td>
-            { false && <td>{v.format && v.format('ddd')}</td> }
-            <td>{v.format ? v.format('MM-DD') : v}</td>
-          </tr>
+        {Object.entries(feasts).map(([feast, date]) => (
+          <YearFeastRow key={feast} feast={feast} date={date} />
         ))}
       </tbody>
     </table>

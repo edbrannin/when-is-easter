@@ -8,6 +8,7 @@
     "moment-easter": "https://github.com/nzdenek/moment-easter.git#module-checks",
     "react": "^16.3.0",
     "react-dom": "^16.3.0",
+    "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.1"
   },
   "scripts": {

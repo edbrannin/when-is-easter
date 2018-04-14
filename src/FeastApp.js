@@ -1,19 +1,31 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import YearFeasts from './YearFeasts';
-import { yearSpan, feastsInYear, feastsInYearsToFeastsByDay } from './Feasts';
+import FeastsOnDay from './FeastsOnDay';
+import {
+  yearSpan,
+  feastsOnDayFilter,
+  feastsInYear,
+  feastsInYearsToFeastsByDay,
+  feastsByYearToFeastsOnDay,
+} from './Feasts';
+import Debug from './Debug';
 
 const computeEasterForYears = ({ startYear, endYear }) => {
   const years = yearSpan(startYear, endYear);
   const feastsByYear = years.map(feastsInYear);
-  const daysByDate = feastsInYearsToFeastsByDay(feastsByYear);
+  // const feastsByDate = feastsInYearsToFeastsByDay(feastsByYear);
+  const datesByFeast = {};
 
   return {
+    done: true,
     startYear,
     endYear,
     years,
     feastsByYear,
-    daysByDate,
+    // feastsByDate,
+    datesByFeast,
   };
 };
 
@@ -38,18 +50,60 @@ class FeastApp extends Component {
 
   render() {
     const { highlightYear } = this.props;
-    const { feastsByYear } = this.state;
-    return (
-      <div>
-        {feastsByYear &&
-          feastsByYear.map(feasts => (
-            <YearFeasts
-              key={feasts.year}
-              feasts={feasts}
-              highlightYear={highlightYear}
-            />
-          ))}
-      </div>
+    const {
+      feastsByYear,
+      // feastsByDate,
+      datesByFeast,
+      done,
+    } = this.state;
+    return !done ? <div /> : (
+      <Router>
+        <div>
+          <Route
+            exact
+            path="/"
+            render={props => (
+              <div>
+                {feastsByYear &&
+                  feastsByYear.map(feasts => (
+                    <YearFeasts
+                      key={feasts.year}
+                      feasts={feasts}
+                      highlightYear={highlightYear}
+                      {...props}
+                    />
+                ))}
+              </div>
+            )}
+          />
+          <Route
+            path="/date/:monthAndDay"
+            render={({ match }) => (
+              <div>
+                <Link to="/">Back</Link>
+                <FeastsOnDay
+                  date={match.params.monthAndDay}
+                  feastsAndDays={feastsByYearToFeastsOnDay(feastsByYear, match.params.monthAndDay)}
+                />
+                <Debug
+                  match={match}
+                  date={match.params.monthAndDay}
+                  feastsAndDays={feastsByYearToFeastsOnDay(feastsByYear, match.params.monthAndDay)}
+                />
+              </div>
+            )}
+          />
+          <Route
+            path="/feast/:name"
+            render={({ match }) => (
+              <div>
+                <Link to="/">Back</Link>
+                <Debug match={match} dates={datesByFeast[match.params.name]} />
+              </div>
+            )}
+          />
+        </div>
+      </Router>
     );
   }
 }

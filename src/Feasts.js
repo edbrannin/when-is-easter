@@ -39,13 +39,30 @@ const feastsInYear = (year) => {
   };
 };
 
-const feastsInYearsToFeastsByDay = feasts => Object.keys(feasts[0]).map(day => ({
-  day,
-  feasts: feasts.map(d => d[day]),
-}));
+const feastsOnDay = (feasts, monthAndDay) => Object.entries(feasts).filter(([feast, feastDate]) => feastDate.format && feastDate.format('MM-DD') === monthAndDay);
+
+const feastsOnDayFilter = monthAndDay => feasts => feastsOnDay(feasts, monthAndDay);
+
+const feastsByYearToFeastsOnDay = (feastList, monthAndDay) => {
+  const onlyOnDay = feastList.map(feasts => feastsOnDay(feasts, monthAndDay));
+  const flatter = _.flatten(onlyOnDay);
+  return flatter;
+}
+
+const onThisDateFilter = date => row =>
+  Object
+    .entries(row)
+    .filter(([, feastDate]) => feastDate.format && feastDate.format('MM-DD') === date);
+
+const feastsInYearsToFeastsByDay = (feasts, date) => (
+  feasts.filter(onThisDateFilter(date))
+);
 
 export {
   yearSpan,
   feastsInYear,
   feastsInYearsToFeastsByDay,
+  feastsOnDay,
+  feastsOnDayFilter,
+  feastsByYearToFeastsOnDay,
 };
