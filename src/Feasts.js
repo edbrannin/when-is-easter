@@ -47,7 +47,7 @@ const feastsByYearToFeastsOnDay = (feastList, monthAndDay) => {
   const onlyOnDay = feastList.map(feasts => feastsOnDay(feasts, monthAndDay));
   const flatter = _.flatten(onlyOnDay);
   return flatter;
-}
+};
 
 const onThisDateFilter = date => row =>
   Object

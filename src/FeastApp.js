@@ -5,9 +5,7 @@ import YearFeasts from './YearFeasts';
 import FeastsOnDay from './FeastsOnDay';
 import {
   yearSpan,
-  feastsOnDayFilter,
   feastsInYear,
-  feastsInYearsToFeastsByDay,
   feastsByYearToFeastsOnDay,
 } from './Feasts';
 import Debug from './Debug';

@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 import FeastName from './FeastName';
-import Debug from './Debug';
 
 const FeastsOnDay = ({ date, feastsAndDays }) => (
   <div>
@@ -8,7 +7,8 @@ const FeastsOnDay = ({ date, feastsAndDays }) => (
     <table style={{
       marginLeft: 'auto',
       marginRight: 'auto',
-      }}>
+      }}
+    >
       <tbody>
         {feastsAndDays.map(([feast, date]) => (
           <tr key={date.toISOString()}>

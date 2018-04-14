@@ -113,7 +113,7 @@ describe('feastsByYearToFeastsOnDay', () => {
     const answer = feastsByYearToFeastsOnDay(byYear, '04-14');
     expect(answer).toHaveLength(1);
 
-    const [ feastName, date ] = answer[0];
+    const [feastName, date] = answer[0];
     expect(feastName).toBe('palmSunday');
     expect(date).toBeDate(2019, 4, 14);
   });
