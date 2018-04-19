@@ -13,11 +13,13 @@ const YearFeastRow = ({ feast, date }) => {
   return (
     <tr key={feast}>
       <td>
-        { false ? <Link to={`/feast/${feast}`}>
+        { false ?
+          <Link to={`/feast/${feast}`}>
+            <FeastName name={feast} />
+          </Link>
+          :
           <FeastName name={feast} />
-        </Link> :
-        <FeastName name={feast} />
-          }
+        }
       </td>
       { false && <td>{date.format && date.format('ddd')}</td> }
       <td>
