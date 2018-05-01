@@ -1,0 +1,8 @@
+ [build.environment]
+   CI = "netlify"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
