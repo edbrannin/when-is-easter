@@ -24,7 +24,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">When is Easter?</h1>
+          <h1 className="App-title"><a href="/">When is Easter?</a></h1>
           <YearInput
             label="Starting"
             defaultValue={moment().subtract(2, 'years').year()}
